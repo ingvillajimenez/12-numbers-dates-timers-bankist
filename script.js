@@ -338,7 +338,7 @@ console.log((2.7).toFixed(0)); // "3"
 console.log((2.7).toFixed(3)); // "2.700"
 console.log((2.345).toFixed(2)); // "2.35"
 console.log(+(2.345).toFixed(2)); // 2.35
-*/
+
 
 /////////////////////////////////////////////////
 // The Remainder Operator
@@ -368,3 +368,24 @@ labelBalance.addEventListener("click", function () {
     if (i % 2 !== 0) row.style.backgroundColor = "blue";
   });
 });
+*/
+
+/////////////////////////////////////////////////
+// NUMERIC Separators
+
+// 287,460,000,000
+const diameter = 287_460_000_000; // thousands
+console.log(diameter);
+
+const price = 345_99; // cents
+console.log(price);
+
+const transferFee1 = 15_00; // cents
+const transferFee2 = 1_500; // thousands
+
+const PI = 3.1415;
+console.log(PI);
+
+console.log(Number("230000")); // 230000
+console.log(Number("230_000")); // NaN -> Fail
+console.log(parseInt("230_000")); // 230 -> Wrong number
