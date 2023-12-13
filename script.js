@@ -84,7 +84,7 @@ const inputClosePin = document.querySelector(".form__input--pin");
 ///////////////////////////////////////////////
 // Operations With Dates
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
@@ -95,10 +95,11 @@ const formatMovementDate = function (date) {
   if (daysPassed === 1) return "Yesterday";
   if (daysPassed <= 7) return `${daysPassed} days ago`;
 
-  const day = `${date.getDate()}`.padStart(2, 0);
-  const month = `${date.getMonth() + 1}`.padStart(2, 0);
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  // const day = `${date.getDate()}`.padStart(2, 0);
+  // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  // const year = date.getFullYear();
+  // return `${day}/${month}/${year}`;
+  return new Intl.DateTimeFormat(locale).format(date);
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -112,7 +113,7 @@ const displayMovements = function (acc, sort = false) {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = `
       <div class="movements__row">
@@ -203,16 +204,37 @@ btnLogin.addEventListener("click", function (e) {
     containerApp.style.opacity = 100;
 
     ///////////////////////////////////////////////
+    // Internationalizing Dates (Intl)
+
+    // Experimenting Internationalization API
+    const now = new Date();
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+      // weekday: "long",
+    };
+    // const locale = navigator.language; // coming from the browser
+    // console.log(locale);
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
+
+    ///////////////////////////////////////////////
     // Adding Dates to "Bankist" App
 
     // Create current date and time
-    const now = new Date();
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min = `${now.getMinutes()}`.padStart(2, 0);
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`; // day/month/year, hour:minute
+    // const now = new Date();
+    // const day = `${now.getDate()}`.padStart(2, 0);
+    // const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2, 0);
+    // const min = `${now.getMinutes()}`.padStart(2, 0);
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`; // day/month/year, hour:minute
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
@@ -476,13 +498,13 @@ console.log(huge + " is REALLY big!!!"); // 20289830237283728378237 is REALLY bi
 // Divisions
 console.log(11n / 3n); // 3n
 console.log(10 / 3); // 3.3333333333333335
-*/
+
 
 /////////////////////////////////////////////////
 // Creating Dates
 
 // Create a date
-/*
+
 const now = new Date();
 console.log(now); // Tue Dec 12 2023 20:47:34 GMT-0600 (Central Standard Time)
 
@@ -516,7 +538,7 @@ console.log(Date.now()); // 1702479372000 -> timestamp
 
 future.setFullYear(2040);
 console.log(future); // Mon Nov 19 2040 15:23:00 GMT-0600 (Central Standard Time)
-*/
+
 
 ///////////////////////////////////////////////
 // Operations With Dates
@@ -530,3 +552,4 @@ const calcDaysPassed = (date1, date2) =>
 
 const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
 console.log(days1); // 10 (days)
+*/
