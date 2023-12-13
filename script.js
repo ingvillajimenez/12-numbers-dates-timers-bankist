@@ -368,7 +368,7 @@ labelBalance.addEventListener("click", function () {
     if (i % 2 !== 0) row.style.backgroundColor = "blue";
   });
 });
-*/
+
 
 /////////////////////////////////////////////////
 // NUMERIC Separators
@@ -383,9 +383,46 @@ console.log(price);
 const transferFee1 = 15_00; // cents
 const transferFee2 = 1_500; // thousands
 
-const PI = 3.1415;
+// const PI = 3._1415; // Uncaught SyntaxError: Invalid or unexpected token
 console.log(PI);
 
 console.log(Number("230000")); // 230000
 console.log(Number("230_000")); // NaN -> Fail
 console.log(parseInt("230_000")); // 230 -> Wrong number
+*/
+
+/////////////////////////////////////////////////
+// Working with BigInt
+
+console.log(2 ** 53 - 1); // 9007199254740991
+console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+console.log(2 ** 53 + 1); // 9007199254740992 -> Wrong number
+console.log(2 ** 53 + 2); // 9007199254740994 -> Correct number
+console.log(2 ** 53 + 3); // 9007199254740996 -> Wrong number
+console.log(2 ** 53 + 4); // 9007199254740996 -> Correct number
+
+// Two ways to build BigInt numbers
+console.log(4838430248342043823408394839483204n); // 4838430248342043823408394839483204n -> BigInt
+console.log(BigInt(48384302)); // 48384302n -> BigInt
+
+// Operations -> all operands have to be BigInt
+console.log(10000n + 10000n); // 20000n
+console.log(36286372637263726376237263726372632n * 10000000n); // 362863726372637263762372637263726320000000n
+// console.log(Math.sqrt(16n)); // Uncaught TypeError: Cannot convert a BigInt value to a number
+
+const huge = 20289830237283728378237n;
+const num = 23;
+// console.log(huge * num); // Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
+console.log(huge * BigInt(num)); // 466666095457525752699451n
+
+// Exceptions -> conditional operators and + (concatenation), operands can be different
+console.log(20n > 15); // true
+console.log(20n === 20); // false
+console.log(typeof 20n); // bigint
+console.log(20n == "20"); // true
+
+console.log(huge + " is REALLY big!!!"); // 20289830237283728378237 is REALLY big!!!
+
+// Divisions
+console.log(11n / 3n); // 3n
+console.log(10 / 3); // 3.3333333333333335
