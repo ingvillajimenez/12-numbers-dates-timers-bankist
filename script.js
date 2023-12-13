@@ -389,7 +389,7 @@ console.log(PI);
 console.log(Number("230000")); // 230000
 console.log(Number("230_000")); // NaN -> Fail
 console.log(parseInt("230_000")); // 230 -> Wrong number
-*/
+
 
 /////////////////////////////////////////////////
 // Working with BigInt
@@ -426,3 +426,43 @@ console.log(huge + " is REALLY big!!!"); // 20289830237283728378237 is REALLY bi
 // Divisions
 console.log(11n / 3n); // 3n
 console.log(10 / 3); // 3.3333333333333335
+*/
+
+/////////////////////////////////////////////////
+// Creating Dates
+
+// Create a date
+/*
+const now = new Date();
+console.log(now); // Tue Dec 12 2023 20:47:34 GMT-0600 (Central Standard Time)
+
+console.log(new Date("Dec 12 2023 20:47:34")); // Tue Dec 12 2023 20:47:34 GMT-0600 (Central Standard Time)
+console.log(new Date("December 24, 2015")); // Thu Dec 24 2015 00:00:00 GMT-0600 (Central Standard Time)
+console.log(new Date(account1.movementsDates[0])); // Mon Nov 18 2019 15:31:17 GMT-0600 (Central Standard Time)
+
+console.log(new Date(2037, 10, 19, 15, 23, 5)); // Thu Nov 19 2037 15:23:05 GMT-0600 (Central Standard Time)
+console.log(new Date(2037, 10, 31)); // Tue Dec 01 2037 00:00:00 GMT-0600 (Central Standard Time)
+
+console.log(new Date(0)); // Wed Dec 31 1969 18:00:00 GMT-0600 (Central Standard Time)
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); // Sat Jan 03 1970 18:00:00 GMT-0600 (Central Standard Time)
+*/
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future); // Thu Nov 19 2037 15:23:00
+console.log(future.getFullYear()); // 2037
+console.log(future.getMonth()); // 10
+console.log(future.getDate()); // 19
+console.log(future.getDay()); // 4 -> Thu
+console.log(future.getHours()); // 15
+console.log(future.getMinutes()); // 23
+console.log(future.getSeconds()); // 0
+console.log(future.toISOString()); // 2037-11-19T21:23:00.000Z
+console.log(future.getTime()); // 2142278580000 -> timestamp
+
+console.log(new Date(2142278580000)); // Thu Nov 19 2037 15:23:00 GMT-0600 (Central Standard Time)
+
+console.log(Date.now()); // 1702479372000 -> timestamp
+
+future.setFullYear(2040);
+console.log(future); // Mon Nov 19 2040 15:23:00 GMT-0600 (Central Standard Time)
